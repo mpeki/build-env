@@ -11,9 +11,9 @@ concurrency:
   cancel-in-progress: true
 jobs:
   release:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Merge back to develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge back to develop
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           git tag -d v0
