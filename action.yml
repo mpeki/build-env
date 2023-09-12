@@ -39,6 +39,6 @@ runs:
         if: ${{  inputs.use-docker }}
         uses: docker/login-action@v2
         with:
-          username: ${{ docker-user }}
-          password: ${{ docker-password }}
+          username: ${{ inputs.docker-user }}
+          password: ${{ inputs.docker-password }}
 
