@@ -15,12 +15,6 @@ inputs:
     required: true
     default: true
     type: boolean
-  docker-user:
-    describtion: 'Docker user'
-    required: false
-  docker-password:
-    description: 'Docker password'
-    required: false
 runs:
     using: 'composite'
     steps:
