@@ -1,6 +1,11 @@
 name: 'DoDGame Build Environment'
 description: 'CI Tools for the DoDGame'
 inputs:
+  use-java:
+    description: 'Whether the step needs Java configured'
+    required: true
+    default: true
+    type: boolean
   java-version:
     description: 'Set Java version to use'
     required: true
@@ -13,6 +18,7 @@ runs:
         with:
           fetch-depth: '0'
       - name: Set up JDK
+        if: {{  inputs.user-java }}
         uses: actions/setup-java@v3.6.0
         with:
           java-version: ${{ inputs.java-version }}
