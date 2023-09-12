@@ -15,6 +15,12 @@ inputs:
     required: true
     default: true
     type: boolean
+  docker-user:
+    describtion: 'Docker user'
+    required: false
+  docker-password:
+    description: 'Docker password'
+    required: false
 runs:
     using: 'composite'
     steps:
@@ -33,6 +39,6 @@ runs:
         if: {{  inputs.use-docker }}
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          username: ${{ docker-user }}
+          password: ${{ docker-password }}
 
