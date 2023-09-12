@@ -1,7 +1,7 @@
 name: 'DoDGame Build Environment'
 description: 'CI Tools for the DoDGame'
-inputs:
-  java-version:
+# inputs:
+#   java-version:
 runs:
     using: 'composite'
     uses: actions/checkout@v3.1.0
