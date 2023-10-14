@@ -15,17 +15,14 @@ env:
   DOCKER_USER: ${{ secrets.DOCKERHUB_USER }}
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 jobs:
-  checkout:
+  test:
     runs-on: ubuntu-latest
+    needs: [checkout]
     steps:
       - name: Git checkout
         uses: actions/checkout@v3.1.0
         with:
           fetch-depth: '0'
-  test:
-    runs-on: ubuntu-latest
-    needs: [checkout]
-    steps:
       - uses: mpeki/build-env/pre-build@v1.0.0
       - name: print java version
         run: java -version
@@ -35,6 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
+      - name: Git checkout
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: '0'
       - name: Prepare semantic-release
         run: |
           npm clean-install
