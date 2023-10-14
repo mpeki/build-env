@@ -12,6 +12,8 @@ concurrency:
   cancel-in-progress: true
 env:
   GITHUB_TOKEN: ${{ secrets.SEMREL_TOKEN }}
+  DOCKER_USER: ${{ secrets.DOCKERHUB_USER }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 jobs:
   checkout:
     runs-on: ubuntu-latest
