@@ -1,5 +1,5 @@
-name: 'DoDGame Build Environment'
-description: 'CI Tools for the DoDGame'
+name: 'Build Environment'
+description: 'CI Tools for github actions'
 inputs:
   use-java:
     description: 'Whether the step needs Java configured'
@@ -9,7 +9,7 @@ inputs:
   java-version:
     description: 'Set Java version to use'
     required: true
-    default: '17'
+    default: '20'
   use-docker:
     description: 'Do you want to use Docker'
     required: true
@@ -24,10 +24,10 @@ runs:
           fetch-depth: '0'
       - name: Set up JDK
         if: ${{ inputs.use-java == 'true' }}
-        uses: actions/setup-java@v3.6.0
+        uses: actions/setup-java@v3.13.0
         with:
           java-version: ${{ inputs.java-version }}
-          distribution: 'adopt'
+          distribution: 'temurin'
           cache: gradle
       - name: Login to Docker Hub
         if: ${{  inputs.use-docker == 'true' }}

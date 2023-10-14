@@ -1,0 +1,10 @@
+{
+  "name": "build-env",
+  "private": true,
+  "release": {
+    "branches": ["main"]
+  },
+  "devDependencies": {
+    "semantic-release": "^22.0.5"
+  }
+}
