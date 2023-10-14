@@ -13,6 +13,11 @@ concurrency:
 env:
   GITHUB_TOKEN: ${{ secrets.SEMREL_TOKEN }}
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mpeki/build-env/pre-build@v1
+        run: java -version
   release:
     runs-on: ubuntu-latest
     steps:
