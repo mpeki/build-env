@@ -13,21 +13,25 @@ concurrency:
 env:
   GITHUB_TOKEN: ${{ secrets.SEMREL_TOKEN }}
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: mpeki/build-env/pre-build@v1
-      - name: print java version
-        run: java -version
-      - name: print gradle version
-        run: gradle --version
-  release:
+  checkout:
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
         uses: actions/checkout@v3.1.0
         with:
           fetch-depth: '0'
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mpeki/build-env/pre-build@v1.0.0
+      - name: print java version
+        run: java -version
+      - name: print gradle version
+        run: gradle --version
+  release:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
       - name: Prepare semantic-release
         run: |
           npm clean-install
