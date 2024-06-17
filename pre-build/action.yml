@@ -9,7 +9,7 @@ inputs:
   java-version:
     description: 'Set Java version to use'
     required: true
-    default: '20'
+    default: '21'
   use-docker:
     description: 'Do you want to use Docker'
     required: true
