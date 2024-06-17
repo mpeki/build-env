@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4.1.0
         with:
           fetch-depth: '0'
-      - uses: mpeki/build-env/pre-build@v1.0.0
+      - uses: mpeki/build-env/pre-build@v1.0.2
       - name: print java version
         run: java -version
       - name: print gradle version
