@@ -1,0 +1,18 @@
+name: Test build‑env locally
+on:
+  workflow_dispatch:     # makes it easy to run with `act -j test`
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Point to the folder where action.yml lives
+      - uses: ./pre-build           # <── LOCAL!
+        with:
+          use-java: true
+          java-version: '21'
+          use-docker: false
+      - name: print gradle version
+        run: ./gradlew --version
+      - name: print java version
+        run: java -version
