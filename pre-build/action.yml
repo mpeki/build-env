@@ -1,5 +1,6 @@
 name: 'Build Environment'
-description: 'CI Tools for github actions'
+description: 'CI Tools for GitHub Actions'
+
 inputs:
   use-java:
     description: 'Whether the step needs Java configured'
@@ -15,27 +16,36 @@ inputs:
     required: true
     default: true
     type: boolean
+
 runs:
   using: 'composite'
   steps:
+    # 1) Checkout
     - name: Git checkout
       uses: actions/checkout@v4.2.2
       with:
-        fetch-depth: '0'
-      run:
+        fetch-depth: 0
+
+    # 2) Configure Git user  (run‑type step ⇒ needs shell)
+    - name: Configure Git user
+      shell: bash
+      run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
+        git config --global user.name  "github-actions[bot]"
+
+    # 3) Set up JDK (conditional)
     - name: Set up JDK
       if: ${{ inputs.use-java == 'true' }}
       uses: actions/setup-java@v4.7.1
       with:
         java-version: ${{ inputs.java-version }}
-        distribution: 'temurin'
+        distribution: temurin
         cache: gradle
+
+    # 4) Login to Docker Hub (conditional)
     - name: Login to Docker Hub
       if: ${{  inputs.use-docker == 'true' }}
       uses: docker/login-action@v3.4.0
       with:
         username: ${{ env.DOCKER_USER }}
         password: ${{ env.DOCKER_PASSWORD }}
-
